@@ -1,0 +1,21 @@
+-- Sample PostgreSQL query (just try it out)
+CREATE TABLE IF NOT EXISTS categories(
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    categoryName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS products(
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    productName VARCHAR(255) NOT NULL,
+    categoryID INT,
+    CONSTRAINT fk_categoryID
+        FOREIGN KEY(categoryID)
+            REFERENCES categories(id)
+);
+
+INSERT INTO categories(categoryName) VALUES('Cat1');
+INSERT INTO categories(categoryName) VALUES('Cat2');
+INSERT INTO products(productName, categoryID) VALUES('Prod1', 1);
+INSERT INTO products(productName, categoryID)  VALUES('Prod2', 2);
+SELECT * FROM categories;
+SELECT * FROM products;
