@@ -1,0 +1,28 @@
+<html>
+  <%- include("partials/head", {title: title}) %>
+  <body>
+    <header>
+      <%- include("partials/nav") %>
+    </header>
+    <h1>Products:</h1>
+    <br>
+    <form action="/products" method="post">
+      <label for="productName">Product Name:</label>
+      <input type="text" name="productName" id="productName">
+      <label for="categoryName">Category:</label>
+      <select name="categoryId" id="categoryName">
+        <% categories.forEach((category) => { %>
+          <option value="<%= category.id %>"><%= category.categoryname %></option>
+        <% }) %>
+      </select>
+      <button type="submit">Add New Product</button>
+    </form>
+    <br>
+    <br>
+    <ul>
+      <% products.forEach((product) => { %>
+        <li>Product Name: <%= product.productname %>, Category: <%= product.categoryname %> <button>Delete</button></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
