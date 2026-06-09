@@ -1,0 +1,39 @@
+<html lang="en">
+  <%- include("partials/head", {title: title}) %>
+  <body>
+    <header>
+      <%- include("partials/nav", {active: "products"}) %>
+    </header>
+    <main class="products-edit-main">
+      <h1>Edit Product</h1>
+      <br>
+        <form class="product-form" action="/products/<%= product.productid %>/edit" method="post">
+          <label for="productName">Name:</label>
+          <input type="text" name="productName" id="productName" value="<%= product.productname %>" autofocus>
+          <label for="productSKU">SKU</label>
+          <input type="number" name="productSKU" id="productSKU" value="<%= product.sku %>">
+          <label for="productPrice">Price:</label>
+          <input type="number" name="productPrice" id="productPrice" value="<%= product.price %>">
+          <label for="productStock">Stock:</label>
+          <input type="number" name="productStock" id="productStock" value="<%= product.stock %>">
+          <label for="productCapacity">Capacity:</label>
+          <input type="number" name="productCapacity" id="productCapacity" value="<%= product.capacity %>">
+          <label for="categoryName">Category:</label>
+          <select name="categoryId" id="categoryName">
+            <% categories.forEach((category) => { %>
+              <% if (category.categoryname === product.categoryname) { %>
+                  <option value="<%= category.id %>" selected="selected"><%= category.categoryname %></option>
+                <% }else { %>
+                  <option value="<%= category.id %>"><%= category.categoryname %></option>
+                <% } %>
+              <% }) %>
+          </select>
+          <button type="submit">Update Product</button>
+        </form>
+        <a class="go-back-button" href="/products">Go Back</a>
+      <br>
+    </main>
+
+    <%- include("partials/footer") %>
+  </body>
+</html>

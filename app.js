@@ -1,23 +1,41 @@
 require("dotenv").config();
+const helmet = require("helmet");
 const path = require("node:path");
 const express = require("express");
 const app = express();
-const { homeRouter } = require("./routers/homeRouter")
-const { itemsRouter } = require("./routers/itemsRouter")
-const { categoryRouter } = require("./routers/categoryRouter")
+const { itemsRouter } = require("./routers/itemsRouter");
+const { categoryRouter } = require("./routers/categoryRouter");
 
-app.use(express.urlencoded({extended: false}));
+//helmet middleware
+app.use(helmet());
+
+//express public + form handling
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+//ejs setup
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"))
+app.set("views", path.join(__dirname, "views"));
 
-app.use("/", homeRouter);
+//routes
 app.use("/categories", categoryRouter);
 app.use("/products", itemsRouter);
+app.get("/", (req, res) => {
+  res.render("home", { title: "Home Page" });
+});
+app.use((req, res, next) => {
+  res.status(404).render("error", { title: "error" });
+});
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).render("error", { title: "error page" });
+});
 
-app.listen(process.env.PORT, (err) => {
-  if (err) throw err
+//server
+const server = app.listen(process.env.PORT, () => {
+  console.log("running");
+});
 
-  console.log("running")
-})
+server.on("error", (err) => {
+  console.error(err);
+});

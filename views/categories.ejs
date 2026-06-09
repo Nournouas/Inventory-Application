@@ -2,8 +2,39 @@
   <%- include("partials/head", {title: title}) %>
   <body>
     <header>
-      <%- include("partials/nav") %>
+      <%- include("partials/nav", {active: "categories"}) %>
     </header>
-    <h1>Categories:</h1>
+    <main class="products-main">
+      <div class="add-product-div">
+        <h2>Add Categories:</h2>
+        <br>
+        <form class="product-form" action="/categories" method="post">
+          <label for="categoryName">Category Name:</label>
+          <input type="text" name="categoryName" id="categoryName">
+          <label for="categoryTotal">Total:</label>
+          <input type="number" name="categoryTotal" id="categoryTotal">
+          <button type="submit">Add New Category</button>
+        </form>
+      </div>
+      <div class="vertical-seperator"></div>
+      <div class="products-list">
+        <h2 class="h2-title">Categories:</h2>
+        <% if (categories.length != 0){ %>
+            <% categories.forEach((category) => { %>
+              <form action="/categories/delete" method="post">
+                <div class="product-details-bullet title" ><span>Category Name:</span> <%= category.categoryname %></div>
+                <ul class="product-unordered-list">
+                  <div class="product-details-bullet product-bullet-border" ><span>Category Products:</span> <%= category.numberofproducts %></div>
+                  <div class="product-details-bullet" ><span>Category Total Capacity:</span> <%= category.total %></div>
+                </ul>
+                <a class="edit-product-button" href="/categories/<%= category.id %>/edit">Edit</a>
+                <button class="delete-product-button" type="submit" name="deleteId" value="<%= category.id %>">Delete</button>
+              </form>
+              <div class="horizontal-seperator"></div>
+            <% }) %>
+        <% } %>
+      </div>
+    </main>
+    <%- include("partials/footer") %>
   </body>
 </html>

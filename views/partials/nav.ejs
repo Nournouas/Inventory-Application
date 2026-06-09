@@ -1,4 +1,27 @@
-<nav>
-  <a href="/categories">Categories</a>
-  <a href="/products">Products</a>
-</nav>
+
+<% if (active === "home") { %>
+  <nav>
+    <a href="/" class="active">Dashboard</a>
+    <a href="/categories">Categories</a>
+    <a href="/products">Products</a>
+  </nav>
+<% }else if (active === "categories" ){ %>
+  <nav>
+    <a href="/">Dashboard</a>
+    <a href="/categories" class="active">Categories</a>
+    <a href="/products">Products</a>
+  </nav>
+<% }else if (active === "products" ){ %>
+  <nav>
+    <a href="/">Dashboard</a>
+    <a href="/categories">Categories</a>
+    <a href="/products" class="active">Products</a>
+  </nav>
+<% }else { %>
+  <nav>
+    <a href="/">Dashboard</a>
+    <a href="/categories">Categories</a>
+    <a href="/products">Products</a>
+  </nav>
+<% } %>
+

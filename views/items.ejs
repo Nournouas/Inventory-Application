@@ -1,28 +1,61 @@
-<html>
+<html lang="en">
   <%- include("partials/head", {title: title}) %>
   <body>
     <header>
-      <%- include("partials/nav") %>
+      <%- include("partials/nav", {active: "products"}) %>
     </header>
-    <h1>Products:</h1>
-    <br>
-    <form action="/products" method="post">
-      <label for="productName">Product Name:</label>
-      <input type="text" name="productName" id="productName">
-      <label for="categoryName">Category:</label>
-      <select name="categoryId" id="categoryName">
-        <% categories.forEach((category) => { %>
-          <option value="<%= category.id %>"><%= category.categoryname %></option>
-        <% }) %>
-      </select>
-      <button type="submit">Add New Product</button>
-    </form>
-    <br>
-    <br>
-    <ul>
-      <% products.forEach((product) => { %>
-        <li>Product Name: <%= product.productname %>, Category: <%= product.categoryname %> <button>Delete</button></li>
-      <% }) %>
-    </ul>
+    <main class="products-main">
+      <div class="add-product-div">
+        <h2>Add Products:</h2>
+        <br>
+        <% if (categories.length != 0) { %>
+          <form class="product-form" action="/products" method="post">
+            <label for="productName">Name:</label>
+            <input type="text" name="productName" id="productName" autofocus>
+            <label for="productSKU">SKU</label>
+            <input type="number" name="productSKU" id="productSKU">
+            <label for="productPrice">Price:</label>
+            <input type="number" name="productPrice" id="productPrice">
+            <label for="productStock">Stock:</label>
+            <input type="number" name="productStock" id="productStock">
+            <label for="productCapacity">Capacity:</label>
+            <input type="number" name="productCapacity" id="productCapacity">
+            <label for="categoryName">Category:</label>
+            <select name="categoryId" id="categoryName">
+              <% categories.forEach((category) => { %>
+                <option value="<%= category.id %>"><%= category.categoryname %></option>
+              <% }) %>
+            </select>
+            <button type="submit">Add New Product</button>
+          </form>
+          <% } else { %>
+            <h2>No categories exist yet, add one before adding products.</h2>
+            <a href="/categories">Go to categories page</a>
+          <% } %>
+      </div>
+      <div class="vertical-seperator"></div>
+      <div class="products-list">
+        <h2 class="h2-title">Products:</h2>
+        <% if (products.length != 0) { %>
+          <% products.forEach((product) => { %>
+            <form action="/products/delete" method="post">
+              <div class="product-details-bullet title" ><span>Product Name:</span> <%= product.productname %></div>
+              <ul class="product-unordered-list"> 
+                
+                <div class="product-details-bullet product-bullet-border" ><span>Category:</span> <%= product.categoryname %></div>
+                <div class="product-details-bullet" ><span>Product SKU:</span> <%= product.sku %></div>
+                <div class="product-details-bullet product-bullet-border" ><span>Product Price:</span> $<%= product.price %></div>
+                <div class="product-details-bullet" ><span>Product Stock:</span> <%= product.stock %> Units</div>
+                <div class="product-details-bullet product-bullet-border" ><span>Product Capacity:</span> <%= product.capacity %> Units</div>
+              </ul>
+              <a class="edit-product-button" href="/products/<%= product.productid %>/edit">Edit</a>
+              <button class="delete-product-button" type="submit" name="deleteId" value="<%= product.productid %>">Delete</button>
+            </form>
+            <div class="horizontal-seperator"></div>
+          <% }) %>
+        <% } %>
+      </div>
+    </main>
+    <%- include("partials/footer") %>
   </body>
 </html>

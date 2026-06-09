@@ -2,8 +2,33 @@
   <%- include("partials/head", {title: title}) %>
   <body>
     <header>
-      <%- include("partials/nav") %>
+      <%- include("partials/nav", {active: "home"}) %>
     </header>
-    <h1>Home</h1>
+    <main>
+      <br>
+      <br>
+      <div class="card-container">
+        <div class="card">
+          <a class="card-wrapper" href="/categories">
+            <img class="product-img" src="categories.png" alt="">
+            <h2>Categories</h2>
+            <p>This page will allow you to add, remove or update Categories in your inventory</p>
+            <br>
+            <a href="/categories">Manage Categories ></a>
+          </a>
+        </div>
+        <div class="card">
+          <a class="card-wrapper" href="/products">
+            <img class="product-img" src="products.png" alt="">
+            <h2>Products</h2>
+            <p>This page will allow you to add, remove or update products in your inventory</p>
+            <br>
+            <a href="/products">Manage Products ></a>
+          </a>
+        </div>
+
+      </div>
+    </main>
+    <%- include("partials/footer") %>
   </body>
 </html>
