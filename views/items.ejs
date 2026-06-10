@@ -39,14 +39,14 @@
         <% if (products.length != 0) { %>
           <% products.forEach((product) => { %>
             <form action="/products/delete" method="post">
-              <div class="product-details-bullet title" ><span>Product Name:</span> <%= product.productname %></div>
+              <div class="product-details-bullet title" ><span><%= product.productname %></span></div>
               <ul class="product-unordered-list"> 
                 
                 <div class="product-details-bullet product-bullet-border" ><span>Category:</span> <%= product.categoryname %></div>
-                <div class="product-details-bullet" ><span>Product SKU:</span> <%= product.sku %></div>
-                <div class="product-details-bullet product-bullet-border" ><span>Product Price:</span> $<%= product.price %></div>
-                <div class="product-details-bullet" ><span>Product Stock:</span> <%= product.stock %> Units</div>
-                <div class="product-details-bullet product-bullet-border" ><span>Product Capacity:</span> <%= product.capacity %> Units</div>
+                <div class="product-details-bullet" ><span>SKU:</span> <%= product.sku %></div>
+                <div class="product-details-bullet product-bullet-border" ><span>Price:</span> $<%= product.price %></div>
+                <div class="product-details-bullet" ><span>Stock:</span> <%= product.stock %> Units</div>
+                <div class="product-details-bullet product-bullet-border" ><span>Capacity:</span> <%= product.capacity %> Units</div>
               </ul>
               <a class="edit-product-button" href="/products/<%= product.productid %>/edit">Edit</a>
               <button class="delete-product-button" type="submit" name="deleteId" value="<%= product.productid %>">Delete</button>

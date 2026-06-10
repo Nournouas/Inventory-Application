@@ -257,6 +257,7 @@ label{
 .title{
   background-color: var(--gray);
   padding: 8px;
+  font-size: 1.4em;
   color: var(--platinum);
 }
 .h2-title{

@@ -22,10 +22,10 @@
         <% if (categories.length != 0){ %>
             <% categories.forEach((category) => { %>
               <form action="/categories/delete" method="post">
-                <div class="product-details-bullet title" ><span>Category Name:</span> <%= category.categoryname %></div>
+                <div class="product-details-bullet title" ><span><%= category.categoryname %></span></div>
                 <ul class="product-unordered-list">
-                  <div class="product-details-bullet product-bullet-border" ><span>Category Products:</span> <%= category.numberofproducts %></div>
-                  <div class="product-details-bullet" ><span>Category Total Capacity:</span> <%= category.total %></div>
+                  <div class="product-details-bullet product-bullet-border" ><span>Child Products:</span> <%= category.numberofproducts %></div>
+                  <div class="product-details-bullet" ><span>Total Capacity:</span> <%= category.total %></div>
                 </ul>
                 <a class="edit-product-button" href="/categories/<%= category.id %>/edit">Edit</a>
                 <button class="delete-product-button" type="submit" name="deleteId" value="<%= category.id %>">Delete</button>

@@ -106,11 +106,12 @@ const editProduct = async (req, res) => {
   res.render("itemsEdit", {title: "product Edit", categories: categories.rows , product: product.rows[0]})
 }
 
-const updateProduct2 = [
+const updateProduct = [
   validateAddProduct,
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      
       console.log(errors);
       return res.status(400).redirect("/products");
     }
@@ -139,12 +140,6 @@ const updateProduct2 = [
     }
   },
 ];
-
-const updateProduct = async (req, res, next) => {
-    console.log(req.body)
-    res.redirect("/")
-  }
-
 
 module.exports = {
   getAllProducts,

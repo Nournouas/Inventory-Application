@@ -25,8 +25,8 @@ SET categoryName = $1, total = $2
 WHERE id = $3;`
 
 const updateProductQuery = `UPDATE products
-SET productName = $1, categoryName, products.id AS productID, SKU, price, stock, capacity
-WHER id = $7`
+SET productName = $1, SKU = $2, price = $3, stock = $4, capacity = $5, categoryID = $6
+WHERE id = $7`
 
 const addProductQuery = `INSERT INTO products(productName, SKU, price, stock, capacity, categoryID) 
 VALUES($1,$2,$3,$4,$5,$6);`
@@ -53,5 +53,6 @@ module.exports = {
   deleteCategoryQuery,
   getCategoryByIDQuery,
   updateCategoryQuery,
-  getProductByIDQuery
+  getProductByIDQuery,
+  updateProductQuery
 };
