@@ -142,7 +142,7 @@ const updateProduct2 = [
 
 const updateProduct = async (req, res, next) => {
     console.log(req.body)
-    redirect("/")
+    res.redirect("/")
   }
 
 
